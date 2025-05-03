@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../store/cart-store-context";
 
 export default function Cart({ onUpdateItemQuantity }) {
-  const { items } = useContext(CartContext);
+  const { items, onCartItemQuantityUpdate } = useContext(CartContext);
 
   const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
@@ -22,9 +22,9 @@ export default function Cart({ onUpdateItemQuantity }) {
                   <span> ({formattedPrice})</span>
                 </div>
                 <div className="cart-item-actions">
-                  <button onClick={() => onUpdateItemQuantity(item.id, -1)}>-</button>
+                  <button onClick={() => onCartItemQuantityUpdate(item.id, -1)}>-</button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => onUpdateItemQuantity(item.id, 1)}>+</button>
+                  <button onClick={() => onCartItemQuantityUpdate(item.id, 1)}>+</button>
                 </div>
               </li>
             );
